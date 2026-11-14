@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AXORIX DASH</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <h2>AXORIX <span>DASH</span></h2>
+    <p>YOUR PERSONAL WORKSPACE</p>
+  </header>
+
+  <main class="container">
+
+    <section class="welcome">
+      <p>WELCOME BACK</p>
+      <h1>Make today productive.</h1>
+      <div id="clock">00:00:00</div>
+      <div id="date"></div>
+    </section>
+
+    <section class="dashboard">
+
+      <div class="card">
+        <h2>✓ My Tasks</h2>
+        <form id="taskForm">
+          <input
+            type="text"
+            id="taskInput"
+            placeholder="Enter a new task..."
+            required
+          >
+          <button type="submit">Add</button>
+        </form>
+        <ul id="taskList"></ul>
+      </div>
+
+      <div class="card">
+        <h2>✎ Quick Notes</h2>
+        <textarea
+          id="notes"
+          placeholder="Write your ideas here..."
+        ></textarea>
+        <p class="save-status" id="saveStatus">Your notes are saved automatically.</p>
+      </div>
+
+    </section>
+
+    <section class="card shortcuts">
+      <h2>Favourite Websites</h2>
+      <div class="links">
+        <a href="https://www.google.com">Google</a>
+        <a href="https://www.youtube.com">YouTube</a>
+        <a href="https://github.com">GitHub</a>
+        <a href="https://www.w3schools.com">W3Schools</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    BUILT WITH ♥ BY AXORIX LAB
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
