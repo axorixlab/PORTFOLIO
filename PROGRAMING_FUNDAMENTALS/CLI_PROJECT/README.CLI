@@ -1,0 +1,272 @@
+# 🐍 PERSONAL EXPENSE / STUDENT MANAGEMENT CLI
+
+A Python-based Command Line Interface (CLI) application for managing personal expenses and student records using SQLite.
+
+## 📌 Project Overview
+
+The Personal Expense / Student Management CLI is a Python application that allows users to manage daily expenses and student information through a simple terminal interface.
+
+It uses SQLite to store records permanently in a local database.
+
+## 🎯 Project Objectives
+
+- Learn Python programming.
+- Understand SQLite database integration.
+- Practice CRUD operations.
+- Manage personal expenses.
+- Store and organize student records.
+- Build a practical command-line application.
+
+## 🚀 Features
+
+### 💰 Personal Expense Management
+
+- Add new expenses.
+- View all expenses.
+- Update existing expenses.
+- Delete expenses.
+- Categorize expenses.
+- Calculate total expenses.
+- Track expense history.
+
+### 🎓 Student Management
+
+- Add new students.
+- View all students.
+- Search students by ID.
+- Update student information.
+- Delete student records.
+- Store student details.
+
+## 🛠️ Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| Python | Main programming language |
+| SQLite | Database management |
+| sqlite3 | Python database library |
+| CLI | User interface |
+| VS Code | Code editor |
+
+## 📂 Project Structure
+
+```text
+PERSONAL-EXPENSE-STUDENT-CLI/
+│
+├── main.py
+├── database.py
+├── expense.py
+├── student.py
+├── README.md
+│
+└── database/
+    └── management.db
+```
+
+## ⚙️ Installation & Setup
+
+### Step 1: Install Python
+
+Download Python from:
+
+https://www.python.org/downloads/
+
+### Step 2: Verify Python Installation
+
+```bash
+python --version
+```
+
+### Step 3: Create Project Folder
+
+```bash
+mkdir PERSONAL-EXPENSE-STUDENT-CLI
+cd PERSONAL-EXPENSE-STUDENT-CLI
+```
+
+### Step 4: Run the Application
+
+```bash
+python main.py
+```
+
+**Note:** Python's sqlite3 module is included in standard Python installations. No separate SQLite Python package is normally required.
+
+## 💻 Main CLI Menu
+
+```text
+========================================
+    PERSONAL EXPENSE / STUDENT MANAGER
+========================================
+
+1. Personal Expense Management
+2. Student Management
+3. View All Records
+4. Database Information
+5. Exit
+
+Enter Your Choice:
+```
+
+## 💰 Expense Management
+
+| Operation | Description |
+|---|---|
+| Add Expense | Add a new expense |
+| View Expenses | Display all expenses |
+| Update Expense | Modify expense details |
+| Delete Expense | Remove an expense |
+| Total Expenses | Calculate total spending |
+| Expense History | Display previous expenses |
+
+### Example Expense Record
+
+```text
+Expense ID: 1
+Title: Food
+Amount: 500
+Category: Daily Needs
+Date: 2026-11-22
+```
+
+## 🎓 Student Management
+
+| Operation | Description |
+|---|---|
+| Add Student | Register a new student |
+| View Students | Display all students |
+| Search Student | Find a student |
+| Update Student | Modify student information |
+| Delete Student | Remove a student record |
+
+### Example Student Record
+
+```text
+Student ID: 101
+Name: Ahmad
+Age: 16
+Class: 10
+City: Narowal
+```
+
+## 🗄️ SQLite Database
+
+The project uses SQLite to save information in a database file.
+
+### Expenses Table
+
+```sql
+CREATE TABLE IF NOT EXISTS expenses (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    amount REAL NOT NULL,
+    category TEXT,
+    date TEXT
+);
+```
+
+### Students Table
+
+```sql
+CREATE TABLE IF NOT EXISTS students (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    age INTEGER,
+    class TEXT,
+    city TEXT
+);
+```
+
+## 🐍 Python SQLite Connection
+
+```python
+import sqlite3
+
+connection = sqlite3.connect("management.db")
+
+cursor = connection.cursor()
+
+print("Database connected successfully!")
+
+connection.close()
+```
+
+## 🔑 Important Python Concepts
+
+| Concept | Description |
+|---|---|
+| import | Imports a Python module |
+| def | Defines a function |
+| print() | Displays output |
+| input() | Takes user input |
+| if / else | Conditional statements |
+| while | Repeats a block of code |
+| for | Iterates over items |
+| try / except | Handles errors |
+| return | Returns a value |
+| class | Defines a class |
+
+## 🔑 Important SQLite Operations
+
+| Operation | SQL Command |
+|---|---|
+| Create | CREATE TABLE |
+| Insert | INSERT INTO |
+| Read | SELECT |
+| Update | UPDATE |
+| Delete | DELETE |
+| Search | WHERE |
+| Sort | ORDER BY |
+| Count | COUNT() |
+
+## 📊 CRUD Operations
+
+CRUD stands for:
+
+1. **CREATE:** Add new records.
+2. **READ:** Retrieve existing records.
+3. **UPDATE:** Modify existing records.
+4. **DELETE:** Remove records.
+
+These four operations are the foundation of this project.
+
+## 🔮 Future Improvements
+
+- Monthly expense reports.
+- Expense category statistics.
+- Student attendance system.
+- Student marks management.
+- Export records to CSV.
+- Search and filtering.
+- Database backup.
+- Improved terminal interface.
+
+## 📚 Learning Outcomes
+
+After completing this project, you will learn:
+
+- Python application development.
+- SQLite database integration.
+- Database CRUD operations.
+- Python functions and modules.
+- Error handling.
+- Command-line application development.
+- Database design and management.
+
+## 👨‍💻 Author
+
+**AXORIX LAB**
+
+Project: Personal Expense / Student Management CLI
+
+Language: Python
+
+Database: SQLite
+
+Category: Software Development
+
+---
+
+⭐ If you find this project useful, consider giving it a star on GitHub.
+
+**Made with dedication by AXORIX LAB.**
