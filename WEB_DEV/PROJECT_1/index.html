@@ -1,70 +1,171 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AXORIX DASH</title>
+  <link rel="icon" href="icon.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <header class="header">
-    <h2>AXORIX <span>DASH</span></h2>
-    <p>YOUR PERSONAL WORKSPACE</p>
+  <header class="topbar">
+    <div class="brand"><img src="icon.png" alt="" width="34" height="34">AXORIX <span>DASH</span></div>
+    <nav>
+      <a href="index.html" class="active" aria-current="page">Dashboard</a>
+      <a href="history.html">Task History</a>
+    </nav>
   </header>
 
-  <main class="container">
-
-    <section class="welcome">
-      <p>WELCOME BACK</p>
-      <h1>Make today productive.</h1>
-      <div id="clock">00:00:00</div>
-      <div id="date"></div>
+  <main class="dash">
+    <section class="hero" aria-label="Today">
+      <div class="hero-main">
+        <p class="greeting" id="greeting"></p>
+        <div class="clock" id="clock">00:00</div>
+        <div class="date" id="date"></div>
+        <p class="quote" id="quote"></p>
+      </div>
+      <aside class="panel weather" id="weather" aria-label="Weather" aria-live="polite">
+        <div class="weather-temp" id="wxTemp">--</div>
+        <div class="weather-desc" id="wxDesc">Loading weather...</div>
+        <div class="weather-place" id="wxPlace"></div>
+      </aside>
     </section>
 
-    <section class="dashboard">
+    <form class="search" id="searchForm" action="https://www.google.com/search" method="get" role="search">
+      <input type="search" name="q" id="searchInput" placeholder="Search Google (press / to focus)" aria-label="Search Google" autocomplete="off">
+      <button type="submit">Search</button>
+    </form>
 
-      <div class="card">
-        <h2>✓ My Tasks</h2>
-        <form id="taskForm">
-          <input
-            type="text"
-            id="taskInput"
-            placeholder="Enter a new task..."
-            required
-          >
-          <button type="submit">Add</button>
-        </form>
-        <ul id="taskList"></ul>
+    <section class="shortcuts-wrap" aria-label="Shortcuts">
+      <div class="shortcuts" id="shortcuts"></div>
+      <div class="shortcut-tools">
+        <button type="button" id="editShortcuts" class="ghost small">Edit shortcuts</button>
       </div>
-
-      <div class="card">
-        <h2>✎ Quick Notes</h2>
-        <textarea
-          id="notes"
-          placeholder="Write your ideas here..."
-        ></textarea>
-        <p class="save-status" id="saveStatus">Your notes are saved automatically.</p>
-      </div>
-
+      <form id="shortcutForm" class="shortcut-form" hidden autocomplete="off">
+        <input type="text" id="scName" placeholder="Name" maxlength="24" aria-label="Shortcut name">
+        <input type="text" id="scUrl" placeholder="Website, for example example.com" maxlength="300" aria-label="Shortcut website">
+        <button type="submit">Add shortcut</button>
+      </form>
+      <p class="msg" id="shortcutMsg" aria-live="polite"></p>
     </section>
 
-    <section class="card shortcuts">
-      <h2>Favourite Websites</h2>
-      <div class="links">
-        <a href="https://www.google.com">Google</a>
-        <a href="https://www.youtube.com">YouTube</a>
-        <a href="https://github.com">GitHub</a>
-        <a href="https://www.w3schools.com">W3Schools</a>
-      </div>
-    </section>
+    <div class="columns">
+      <div class="col">
+        <section class="panel tasks-panel" aria-label="Tasks">
+          <h2>Today's tasks</h2>
+          <form id="taskForm" class="task-form" autocomplete="off">
+            <input id="taskInput" type="text" placeholder="Add a task" maxlength="200" aria-label="New task">
+            <select id="taskPriority" aria-label="Priority">
+              <option value="high">High</option>
+              <option value="medium" selected>Medium</option>
+              <option value="low">Low</option>
+            </select>
+            <input id="taskDue" type="time" aria-label="Due time (optional)">
+            <button type="submit">Add task</button>
+          </form>
+          <ul id="taskList" class="task-list"></ul>
+          <p id="emptyState" class="empty">Nothing planned for today. Add your first task above.</p>
+          <div class="task-actions">
+            <button type="button" id="clearDone" class="ghost">Clear completed</button>
+          </div>
+        </section>
 
+        <section class="panel routine-panel" aria-label="Daily routine">
+          <h2>Daily routine</h2>
+          <p class="hint">These tasks are added to your list automatically every new day.</p>
+          <form id="routineForm" class="task-form" autocomplete="off">
+            <input id="routineInput" type="text" placeholder="For example: Study, Gym" maxlength="120" aria-label="New routine task">
+            <select id="routinePriority" aria-label="Routine priority">
+              <option value="high">High</option>
+              <option value="medium" selected>Medium</option>
+              <option value="low">Low</option>
+            </select>
+            <button type="submit">Add routine</button>
+          </form>
+          <ul id="routineList" class="routine-list"></ul>
+          <p id="routineEmpty" class="empty">No daily routine yet.</p>
+        </section>
+      </div>
+
+      <div class="col">
+        <section class="panel progress-panel" aria-label="Today's progress">
+          <div class="ring-wrap">
+            <svg viewBox="0 0 120 120" class="ring" role="img" aria-label="Progress ring">
+              <circle class="ring-track" cx="60" cy="60" r="52"></circle>
+              <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="52"></circle>
+            </svg>
+            <div class="ring-text"><span id="percent">0%</span></div>
+          </div>
+          <p class="progress-sub" id="progressSub">No tasks yet</p>
+          <div class="streak">
+            <div class="streak-num" id="streakNum">0</div>
+            <div class="streak-text">
+              <strong id="streakLabel">day streak</strong>
+              <span>Finish at least half of your tasks each day</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel timer-panel" aria-label="Focus timer">
+          <h2>Focus timer</h2>
+          <div class="seg" id="timerModes">
+            <button type="button" class="ghost" data-mode="focus" aria-pressed="true">Focus 25</button>
+            <button type="button" class="ghost" data-mode="break" aria-pressed="false">Break 5</button>
+          </div>
+          <div class="timer-display" id="timerDisplay">25:00</div>
+          <div class="timer-actions">
+            <button type="button" id="timerToggle">Start</button>
+            <button type="button" id="timerReset" class="ghost">Reset</button>
+          </div>
+          <p class="hint" id="sessionsText">Focus sessions today: 0</p>
+        </section>
+
+        <section class="panel notes-panel" aria-label="Notes">
+          <h2>Notes</h2>
+          <textarea id="notes" placeholder="Write anything here. It saves automatically." aria-label="Notes"></textarea>
+          <p class="saved" id="savedState" aria-live="polite"></p>
+        </section>
+      </div>
+    </div>
+
+    <details class="panel settings">
+      <summary>Settings</summary>
+      <div class="settings-grid">
+        <div class="setting">
+          <h3>Theme</h3>
+          <div class="seg" id="themeButtons">
+            <button type="button" class="ghost" data-set-theme="blue" aria-pressed="true">Blue</button>
+            <button type="button" class="ghost" data-set-theme="purple" aria-pressed="false">Purple</button>
+            <button type="button" class="ghost" data-set-theme="green" aria-pressed="false">Green</button>
+          </div>
+        </div>
+        <div class="setting">
+          <h3>Background image</h3>
+          <input type="file" id="wallpaperInput" accept="image/*" hidden>
+          <div class="row">
+            <button type="button" id="wallpaperBtn" class="ghost">Choose image</button>
+            <button type="button" id="wallpaperClear" class="ghost">Remove</button>
+          </div>
+        </div>
+        <div class="setting">
+          <h3>Weather city</h3>
+          <form id="cityForm" class="row" autocomplete="off">
+            <input type="text" id="cityInput" placeholder="City name" maxlength="60" aria-label="Weather city">
+            <button type="submit" class="ghost">Save city</button>
+          </form>
+        </div>
+        <div class="setting">
+          <h3>Backup</h3>
+          <input type="file" id="importInput" accept="application/json,.json" hidden>
+          <div class="row">
+            <button type="button" id="exportBtn" class="ghost">Export backup</button>
+            <button type="button" id="importBtn" class="ghost">Import backup</button>
+          </div>
+        </div>
+      </div>
+      <p class="msg" id="settingsMsg" aria-live="polite"></p>
+    </details>
   </main>
-
-  <footer>
-    BUILT WITH ♥ BY AXORIX LAB
-  </footer>
 
   <script src="script.js"></script>
 </body>
