@@ -1,0 +1,725 @@
+# 🥇 GoldTrack – Gold Price Tracker API Project
+
+## 1. Project Introduction
+
+**GoldTrack** is a beginner-friendly JavaScript API integration project that fetches live gold market prices and converts them into multiple international currencies.
+
+This project demonstrates how real-world APIs work, how JavaScript communicates with external servers, how JSON data is received and processed, and how API information is displayed on a website.
+
+GoldTrack uses two external APIs:
+
+1. Gold-API – Fetches gold market prices.
+2. ExchangeRate-API – Fetches international currency exchange rates.
+
+The application combines data from both APIs to calculate estimated gold prices in different currencies.
+
+---
+
+## 2. Project Objectives
+
+The main objectives are:
+
+- Understand what an API is.
+- Learn API integration using JavaScript.
+- Understand HTTP requests and responses.
+- Learn GET request methods.
+- Fetch real-time external data.
+- Understand JSON responses.
+- Work with API endpoints.
+- Learn asynchronous JavaScript.
+- Understand Async and Await.
+- Learn Promise handling.
+- Implement error handling.
+- Convert international currencies.
+- Perform calculations using API data.
+- Display external API data on a website.
+
+---
+
+## 3. What Is an API?
+
+API stands for **Application Programming Interface**.
+
+An API allows two different software applications to communicate and exchange information.
+
+For example:
+
+1. GoldTrack sends a request to Gold-API.
+2. Gold-API receives the request.
+3. The API retrieves gold price information.
+4. The API sends a JSON response.
+5. JavaScript receives and processes the response.
+6. GoldTrack displays the gold price.
+
+### Basic API Workflow
+
+User → JavaScript → API Request → API Server → JSON Response → JavaScript → Website
+
+---
+
+## 4. APIs Used in GoldTrack
+
+### API 1: Gold-API
+
+**Provider:** Gold-API.com
+
+**Purpose:** Fetches gold market prices.
+
+**API Endpoint:**
+
+`https://api.gold-api.com/price/XAU`
+
+**HTTP Method:** GET
+
+**Authentication:** No API key required for this real-time price endpoint.
+
+**Data Format:** JSON
+
+**Main Functions:**
+
+- Retrieve gold prices.
+- Identify gold using the XAU symbol.
+- Return gold price in USD.
+- Provide currency information.
+- Provide the last update timestamp.
+
+### Gold-API Endpoint Structure
+
+`https://api.gold-api.com/price/XAU`
+
+Explanation:
+
+- `https://` – Secure communication protocol.
+- `api.gold-api.com` – API server domain.
+- `/price/` – Price endpoint.
+- `XAU` – International market symbol for gold.
+
+### Gold-API Example Request
+
+```javascript
+const response = await fetch(
+    "https://api.gold-api.com/price/XAU"
+);
+
+if (!response.ok) {
+    throw new Error("Gold API request failed");
+}
+
+const data = await response.json();
+
+console.log(data);
+```
+
+### Example JSON Response
+
+```json
+{
+  "currency": "USD",
+  "currencySymbol": "$",
+  "exchangeRate": 1,
+  "name": "Gold",
+  "price": 3539,
+  "symbol": "XAU",
+  "updatedAt": "2026-11-22T04:06:39Z",
+  "updatedAtReadable": "a few seconds ago"
+}
+```
+
+*Example response for documentation; actual prices and timestamps change.*
+
+### Important Response Parameters
+
+| Parameter | Description |
+|---|---|
+| currency | Price currency |
+| currencySymbol | Currency symbol |
+| exchangeRate | Exchange rate |
+| name | Asset name |
+| price | Gold price |
+| symbol | Gold identification symbol |
+| updatedAt | Last update timestamp |
+| updatedAtReadable | Readable update time |
+
+### Important Gold-API Information
+
+- Real-time price endpoint does not require authentication.
+- The endpoint supports browser requests through CORS.
+- Gold prices are provided per Troy Ounce.
+- Prices are updated approximately every 30 seconds.
+- The API supports other precious metal and asset symbols.
+- The real-time price endpoint is free to use.
+
+---
+
+## 5. API 2: ExchangeRate-API
+
+**Provider:** ExchangeRate-API
+
+**Purpose:** Fetches international currency exchange rates.
+
+**API Endpoint:**
+
+`https://open.er-api.com/v6/latest/USD`
+
+**HTTP Method:** GET
+
+**Authentication:** No API key required for the Open Access endpoint.
+
+**Data Format:** JSON
+
+### Main Functions
+
+- Fetch USD exchange rates.
+- Convert gold prices into PKR.
+- Convert gold prices into GBP.
+- Convert gold prices into EUR.
+- Convert gold prices into AED.
+- Convert gold prices into SAR.
+- Support multiple international currencies.
+
+### Endpoint Structure
+
+`https://open.er-api.com/v6/latest/USD`
+
+Explanation:
+
+- `https://` – Secure communication protocol.
+- `open.er-api.com` – API server.
+- `/v6/` – API version.
+- `/latest/` – Latest available exchange rates.
+- `USD` – Base currency.
+
+### ExchangeRate-API Example Request
+
+```javascript
+const response = await fetch(
+    "https://open.er-api.com/v6/latest/USD"
+);
+
+if (!response.ok) {
+    throw new Error("Currency API request failed");
+}
+
+const data = await response.json();
+
+console.log(data.rates);
+```
+
+### Example JSON Response
+
+```json
+{
+  "result": "success",
+  "base_code": "USD",
+  "time_last_update_utc": "Example update time",
+  "time_next_update_utc": "Example next update time",
+  "rates": {
+    "USD": 1,
+    "PKR": 276.77,
+    "GBP": 0.748,
+    "EUR": 0.896,
+    "AED": 3.672,
+    "SAR": 3.75,
+    "INR": 94.04
+  }
+}
+```
+
+*Illustrative response values only. Actual rates change.*
+
+### Important Response Parameters
+
+| Parameter | Description |
+|---|---|
+| result | Request result |
+| base_code | Base currency |
+| time_last_update_utc | Last update time |
+| time_next_update_utc | Next expected update |
+| rates | Currency exchange rates |
+| PKR | Pakistani Rupee rate |
+| GBP | British Pound rate |
+| EUR | Euro rate |
+| AED | UAE Dirham rate |
+| SAR | Saudi Riyal rate |
+
+### Important ExchangeRate-API Information
+
+- Open Access endpoint does not require an API key.
+- Exchange rates are generally updated once every 24 hours.
+- The API provides rates for multiple currencies.
+- It supports JSON responses.
+- Requests can be rate-limited.
+- HTTP 429 indicates too many requests.
+- Attribution to ExchangeRate-API is required.
+
+---
+
+## 6. Difference Between Both APIs
+
+| Feature | Gold-API | ExchangeRate-API |
+|---|---|---|
+| Main Purpose | Gold prices | Currency rates |
+| HTTP Method | GET | GET |
+| Data Format | JSON | JSON |
+| API Key | Not required | Not required |
+| Data | Gold market price | Exchange rates |
+| Update Frequency | Approximately 30 seconds | Daily |
+| Main Currency | USD | USD base |
+| Endpoint | /price/XAU | /v6/latest/USD |
+
+---
+
+## 7. Complete API Integration Process
+
+GoldTrack uses both APIs to calculate estimated gold prices.
+
+### Step 1: Send Gold API Request
+
+JavaScript sends a GET request to Gold-API.
+
+```javascript
+const response = await fetch(
+    "https://api.gold-api.com/price/XAU"
+);
+
+const goldData = await response.json();
+
+const goldPrice = Number(goldData.price);
+```
+
+### Step 2: Send Currency API Request
+
+JavaScript fetches exchange rates.
+
+```javascript
+const response = await fetch(
+    "https://open.er-api.com/v6/latest/USD"
+);
+
+const currencyData = await response.json();
+
+const rates = currencyData.rates;
+```
+
+### Step 3: Convert Troy Ounce into Grams
+
+One Troy Ounce equals approximately 31.1035 grams.
+
+Formula:
+
+`Gold Price Per Gram = Gold Price Per Ounce / 31.1035`
+
+JavaScript:
+
+```javascript
+const gramPrice = goldPrice / 31.1035;
+```
+
+### Step 4: Calculate Gold Purity
+
+GoldTrack supports different gold purities.
+
+```javascript
+const gold24K = gramPrice;
+
+const gold22K = gramPrice * (22 / 24);
+
+const gold21K = gramPrice * (21 / 24);
+
+const gold18K = gramPrice * (18 / 24);
+```
+
+### Step 5: Convert Currency
+
+Formula:
+
+`Converted Price = USD Price × Exchange Rate`
+
+JavaScript:
+
+```javascript
+const pkrPrice = gramPrice * rates.PKR;
+
+const gbpPrice = gramPrice * rates.GBP;
+
+const eurPrice = gramPrice * rates.EUR;
+
+const aedPrice = gramPrice * rates.AED;
+```
+
+### Step 6: Display API Data
+
+JavaScript displays the calculated prices on the website using DOM manipulation.
+
+```javascript
+document.getElementById("gold-price").textContent =
+    pkrPrice.toFixed(2);
+```
+
+---
+
+## 8. Important API Concepts Used
+
+### 1. API Endpoint
+
+A URL used to access a particular API resource.
+
+### 2. HTTP GET Method
+
+A method used to request information from an API server.
+
+### 3. HTTP Response
+
+The information returned by the API server after processing a request.
+
+### 4. JSON
+
+JavaScript Object Notation is a lightweight data format used to exchange information between applications.
+
+### 5. Fetch API
+
+A JavaScript function used to make HTTP requests.
+
+```javascript
+fetch("API_ENDPOINT");
+```
+
+### 6. Response.json()
+
+Converts the API response body into JavaScript data.
+
+```javascript
+const data = await response.json();
+```
+
+### 7. Async and Await
+
+Used to handle asynchronous API requests.
+
+```javascript
+async function getGoldPrice() {
+    const response = await fetch(
+        "https://api.gold-api.com/price/XAU"
+    );
+
+    const data = await response.json();
+
+    console.log(data.price);
+}
+```
+
+### 8. Promise
+
+A JavaScript object representing the eventual completion or failure of an asynchronous operation.
+
+### 9. Error Handling
+
+Used to handle API errors and failed requests.
+
+```javascript
+try {
+    const response = await fetch(API_URL);
+
+    if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    console.log(data);
+
+} catch (error) {
+    console.error("API Error:", error.message);
+}
+```
+
+### 10. DOM Manipulation
+
+Used to display API information dynamically on the website.
+
+---
+
+## 9. HTTP Status Codes
+
+| Status Code | Meaning |
+|---|---|
+| 200 | OK – Request successful |
+| 400 | Bad Request |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+| 404 | Resource Not Found |
+| 429 | Too Many Requests |
+| 500 | Internal Server Error |
+| 503 | Service Unavailable |
+
+Note: These are common HTTP status codes. Actual API responses depend on the provider.
+
+---
+
+## 10. API Error Handling
+
+Possible API problems:
+
+- No internet connection.
+- API server unavailable.
+- Invalid JSON response.
+- Failed HTTP request.
+- Missing currency rate.
+- API rate limit exceeded.
+- Invalid or unavailable data.
+
+Recommended error-handling example:
+
+```javascript
+async function fetchGoldPrice() {
+    try {
+        const response = await fetch(
+            "https://api.gold-api.com/price/XAU"
+        );
+
+        if (!response.ok) {
+            throw new Error(
+                `Request failed: ${response.status}`
+            );
+        }
+
+        const data = await response.json();
+
+        if (!Number.isFinite(Number(data.price))) {
+            throw new Error("Invalid gold price data");
+        }
+
+        return data.price;
+
+    } catch (error) {
+        console.error("Gold API Error:", error.message);
+        return null;
+    }
+}
+```
+
+---
+
+## 11. Supported Currencies
+
+GoldTrack supports the following currencies:
+
+| Country | Currency | Code |
+|---|---|---|
+| Pakistan | Pakistani Rupee | PKR |
+| USA | US Dollar | USD |
+| UK | Pound Sterling | GBP |
+| Europe | Euro | EUR |
+| UAE | Dirham | AED |
+| Saudi Arabia | Riyal | SAR |
+| Kuwait | Kuwaiti Dinar | KWD |
+| India | Indian Rupee | INR |
+| Canada | Canadian Dollar | CAD |
+| Australia | Australian Dollar | AUD |
+| Japan | Japanese Yen | JPY |
+| China | Chinese Yuan | CNY |
+| Qatar | Qatari Riyal | QAR |
+| Bahrain | Bahraini Dinar | BHD |
+| Oman | Omani Rial | OMR |
+
+---
+
+## 12. Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| HTML5 | Website structure |
+| CSS3 | Website design |
+| JavaScript | Application logic |
+| Fetch API | API communication |
+| REST API | External data access |
+| JSON | Data exchange format |
+| Gold-API | Gold market data |
+| ExchangeRate-API | Currency conversion |
+
+---
+
+## 13. Project Folder Structure
+
+```text
+GoldTrack/
+│
+├── index.html
+│
+├── style.css
+│
+├── script.js
+│
+└── README.md
+```
+
+### File Explanation
+
+- index.html – Main website structure.
+- style.css – Website styling and responsive design.
+- script.js – API integration, data processing, calculations and currency conversion.
+- README.md – Complete project documentation.
+
+---
+
+## 14. Installation and Setup
+
+### Requirements
+
+- Computer or laptop.
+- Visual Studio Code.
+- Internet connection.
+- Google Chrome or another modern browser.
+- Live Server extension.
+
+### Installation Steps
+
+**Step 1:** Clone the repository.
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
+```
+
+**Step 2:** Open the project folder in VS Code.
+
+**Step 3:** Install Live Server.
+
+**Step 4:** Open index.html.
+
+**Step 5:** Right-click and select Open with Live Server.
+
+**Step 6:** Your GoldTrack website will open in the browser.
+
+---
+
+## 15. API Testing
+
+You can test the API endpoints independently by opening them in your browser.
+
+**Gold-API:**
+
+https://api.gold-api.com/price/XAU
+
+**ExchangeRate-API:**
+
+https://open.er-api.com/v6/latest/USD
+
+Both endpoints return JSON data.
+
+You can also inspect API requests and responses through Chrome Developer Tools:
+
+1. Open your GoldTrack website.
+2. Press F12.
+3. Open the Network tab.
+4. Select Fetch/XHR.
+5. Refresh the website.
+6. Click an API request.
+7. Inspect Headers, Status Code and Response.
+
+---
+
+## 16. API Best Practices
+
+- Always check HTTP response status.
+- Handle failed requests using try/catch.
+- Validate API response data.
+- Avoid unnecessary API requests.
+- Cache gold prices according to the provider's update interval.
+- Avoid requesting daily exchange rates repeatedly.
+- Display the actual update timestamps.
+- Use HTTPS endpoints.
+- Never expose private API keys in frontend JavaScript.
+- Follow API provider terms and attribution requirements.
+- Do not assume API data is always available.
+
+---
+
+## 17. Learning Outcomes
+
+After completing this project, students should understand:
+
+- What APIs are.
+- How REST API communication works.
+- What API endpoints are.
+- How GET requests work.
+- How to use Fetch API.
+- How to receive JSON responses.
+- How to use Async and Await.
+- How JavaScript handles Promises.
+- How to handle HTTP errors.
+- How to integrate multiple APIs.
+- How to convert currencies using API data.
+- How to perform calculations using external data.
+- How to display API data dynamically.
+
+---
+
+## 18. Future Improvements
+
+Possible future features:
+
+- Historical gold price charts.
+- Gold price comparison.
+- Automatic price updates.
+- Gold price alerts.
+- Gold weight calculator.
+- Jewellery price estimator.
+- More currency support.
+- API response caching.
+- Advanced dashboard.
+- Gold market statistics.
+
+---
+
+## 19. Important Disclaimer
+
+GoldTrack is an educational API integration project.
+
+The displayed gold prices are indicative spot-price estimates and may differ from local jewellery market prices.
+
+Local taxes, dealer premiums, making charges and other fees are not included.
+
+Currency exchange rates are reference rates and may differ from rates offered by financial institutions.
+
+Always verify information with the original providers before making financial decisions.
+
+---
+
+## 20. Official API Documentation
+
+**Gold-API**
+- Website: https://gold-api.com/
+- API Documentation: https://gold-api.com/docs
+- FAQ: https://gold-api.com/faqs
+
+**ExchangeRate-API**
+- Website: https://www.exchangerate-api.com/
+- Open Access Documentation: https://www.exchangerate-api.com/docs/free
+
+---
+
+## 21. Author
+
+**Project Name:** GoldTrack
+
+**Project Type:** JavaScript API Integration Project
+
+**Programming Language:** JavaScript
+
+**Frontend:** HTML5 and CSS3
+
+**API Integration:** Gold-API and ExchangeRate-API
+
+**Purpose:** Learning real-world API integration, HTTP communication, JSON processing and currency conversion.
+
+---
+
+## 22. Conclusion
+
+GoldTrack demonstrates how multiple external APIs can work together in a single JavaScript application.
+
+It teaches students how to request external data, process JSON responses, perform calculations and display dynamic information.
+
+This project provides practical experience with real-world API integration and frontend web development.
+
+**Thank you for exploring GoldTrack! ⭐**
