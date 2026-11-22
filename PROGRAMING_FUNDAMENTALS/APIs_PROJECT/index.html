@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GoldTrack | Live Gold Prices</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">✦</span>
+                Gold<span>Track</span>
+            </div>
+
+            <div class="live-badge">
+                <span class="live-dot"></span>
+                LIVE TRACKER
+            </div>
+        </header>
+
+
+        <!-- INTRODUCTION -->
+        <section class="intro">
+            <div>
+                <p class="eyebrow">PRECIOUS METALS DASHBOARD</p>
+                <h1>Gold Market <span>Tracker.</span></h1>
+                <p class="subtitle">
+                    Track global gold prices in your preferred currency.
+                </p>
+            </div>
+
+            <div class="gold-symbol">Au</div>
+        </section>
+
+
+        <!-- MAIN GOLD PRICE -->
+        <section class="main-card">
+
+            <div class="main-card-header">
+                <div>
+                    <p class="eyebrow">GLOBAL SPOT PRICE</p>
+                    <h2>Gold Per Troy Ounce</h2>
+                </div>
+
+                <span class="unit-tag">XAU / OUNCE</span>
+            </div>
+
+            <h1 id="goldPrice">Loading...</h1>
+
+            <div class="main-card-footer">
+                <p id="updatedAt">Waiting for API...</p>
+                <span>Indicative spot price</span>
+            </div>
+
+        </section>
+
+
+        <!-- CURRENCY SEARCH -->
+        <section class="search-section">
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">PERSONALIZE YOUR VIEW</p>
+                    <h2>Search Currency</h2>
+                </div>
+            </div>
+
+            <div class="search-row">
+
+                <input
+                    type="search"
+                    id="currencySearch"
+                    placeholder="Search country or currency e.g. Pakistan, PKR"
+                    list="currencyOptions"
+                    autocomplete="off"
+                >
+
+                <datalist id="currencyOptions">
+                    <option value="Pakistan - PKR">
+                    <option value="United States - USD">
+                    <option value="United Kingdom - GBP">
+                    <option value="Eurozone - EUR">
+                    <option value="United Arab Emirates - AED">
+                    <option value="Saudi Arabia - SAR">
+                    <option value="Kuwait - KWD">
+                    <option value="India - INR">
+                    <option value="Canada - CAD">
+                    <option value="Australia - AUD">
+                    <option value="Japan - JPY">
+                    <option value="China - CNY">
+                    <option value="Qatar - QAR">
+                    <option value="Bahrain - BHD">
+                    <option value="Oman - OMR">
+                    <option value="Malaysia - MYR">
+                    <option value="Singapore - SGD">
+                    <option value="Switzerland - CHF">
+                    <option value="South Africa - ZAR">
+                </datalist>
+
+                <button id="applyCurrencyBtn">
+                    Search
+                </button>
+
+            </div>
+
+            <p id="currencyStatus">
+                Default currency: USD
+            </p>
+
+        </section>
+
+
+        <!-- KARAT PRICES -->
+        <section class="prices-section">
+
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">GOLD PURITY BREAKDOWN</p>
+                    <h2>Gold Price Per Gram</h2>
+                </div>
+            </div>
+
+            <div class="cards">
+
+                <div class="card featured">
+                    <span class="card-label">PURE GOLD</span>
+                    <h3>24K</h3>
+                    <p class="purity">99.9% Purity</p>
+                    <h2 id="price24">--</h2>
+                    <small>PER GRAM</small>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">HIGH PURITY</span>
+                    <h3>22K</h3>
+                    <p class="purity">91.6% Purity</p>
+                    <h2 id="price22">--</h2>
+                    <small>PER GRAM</small>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">JEWELLERY</span>
+                    <h3>21K</h3>
+                    <p class="purity">87.5% Purity</p>
+                    <h2 id="price21">--</h2>
+                    <small>PER GRAM</small>
+                </div>
+
+                <div class="card">
+                    <span class="card-label">JEWELLERY</span>
+                    <h3>18K</h3>
+                    <p class="purity">75% Purity</p>
+                    <h2 id="price18">--</h2>
+                    <small>PER GRAM</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- REFRESH SECTION -->
+        <section class="refresh-section">
+
+            <div>
+                <h3>Update Gold Prices</h3>
+                <p>Fetch the latest available market price.</p>
+            </div>
+
+            <button id="refreshBtn">
+                ↻ Refresh Price
+            </button>
+
+        </section>
+
+
+        <!-- STATUS -->
+        <div class="status-section">
+            <span class="live-dot"></span>
+            <p id="status">Ready</p>
+        </div>
+
+
+        <!-- FOOTER -->
+        <footer>
+            <p>GOLDTRACK • LEARNING PROJECT</p>
+
+            <small>
+                Gold data: Gold-API.com |
+                Exchange rates: open.er-api.com
+            </small>
+
+            <small>
+                Prices are indicative estimates. Local taxes,
+                dealer premiums and jewellery charges are excluded.
+            </small>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
