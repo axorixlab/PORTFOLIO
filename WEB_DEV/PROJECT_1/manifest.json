@@ -1,10 +1,22 @@
-
 {
   "manifest_version": 3,
   "name": "AXORIX DASH",
-  "version": "1.0.0",
-  "description": "Your personal productivity dashboard.",
-  "permissions": ["storage"],
+  "version": "3.0",
+  "description": "Blue neon new-tab dashboard with tasks, notes, focus timer, shortcuts, weather and automatic daily history.",
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "downloads"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "chrome_url_overrides": {
     "newtab": "index.html"
   }
