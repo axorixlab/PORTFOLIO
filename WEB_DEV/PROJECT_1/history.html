@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task History - AXORIX DASH</title>
+  <link rel="icon" href="icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><img src="icon.png" alt="" width="34" height="34">AXORIX <span>DASH</span></div>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="history.html" class="active" aria-current="page">Task History</a>
+    </nav>
+  </header>
+
+  <main class="history-page">
+    <div class="history-head">
+      <div>
+        <h1>Task history</h1>
+        <p class="muted" id="summary"></p>
+      </div>
+      <button type="button" id="clearAll" class="danger">Clear all history</button>
+    </div>
+
+    <section class="panel chart-panel" aria-label="Last 7 days">
+      <h2>Last 7 days</h2>
+      <div class="week-chart" id="weekChart" role="img" aria-label="Completion rate for the last 7 days"></div>
+      <p class="muted" id="weekSummary"></p>
+    </section>
+
+    <div id="historyList" class="history-list"></div>
+    <p id="historyEmpty" class="empty" hidden>No archived days yet. A day appears here after it ends with at least one task.</p>
+  </main>
+
+  <script src="history.js"></script>
+</body>
+</html>
