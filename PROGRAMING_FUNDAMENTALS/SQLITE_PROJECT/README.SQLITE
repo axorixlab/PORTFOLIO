@@ -1,0 +1,301 @@
+# SQLITE – Complete Beginner Guide
+
+**Project Name:** SQLITE  
+**Topic:** Database Management System  
+**Level:** Beginner  
+**Language:** SQL (Structured Query Language)
+
+---
+
+## 1. What is SQLite?
+
+SQLite is a lightweight, serverless, self-contained database engine. It is used to store, manage, and organize data.
+
+Unlike MySQL, SQLite does not require a separate database server. It stores the database in a single file.
+
+### Features of SQLite
+- Lightweight and fast.
+- No server required.
+- Easy to use.
+- Stores data in a single file.
+- Supports SQL commands.
+- Free and open-source.
+
+---
+
+## 2. What is SQL?
+
+SQL stands for **Structured Query Language**.
+
+It is used to communicate with databases and perform operations such as creating tables, inserting data, updating records, and deleting data.
+
+---
+
+## 3. Main SQL Commands
+
+| Command | Definition |
+|---|---|
+| CREATE | Creates a database object, such as a table. |
+| INSERT | Adds new records into a table. |
+| SELECT | Retrieves data from a table. |
+| UPDATE | Modifies existing records. |
+| DELETE | Deletes records from a table. |
+| DROP | Removes a database object. |
+| ALTER | Changes the structure of a table. |
+| WHERE | Filters records based on a condition. |
+| ORDER BY | Sorts records. |
+| GROUP BY | Groups records with common values. |
+| LIMIT | Limits the number of returned records. |
+
+---
+
+## 4. Important SQL Keywords
+
+| Keyword | Definition |
+|---|---|
+| PRIMARY KEY | Uniquely identifies each record. |
+| FOREIGN KEY | Creates a relationship between tables. |
+| NOT NULL | Prevents a column from storing NULL values. |
+| UNIQUE | Prevents duplicate values. |
+| DEFAULT | Sets a default value. |
+| AUTOINCREMENT | Automatically increases an INTEGER PRIMARY KEY value. |
+| AND | Combines multiple conditions. |
+| OR | Matches either of multiple conditions. |
+| IN | Checks whether a value matches a list. |
+| BETWEEN | Checks whether a value is within a range. |
+| LIKE | Searches for a matching text pattern. |
+| COUNT() | Counts records. |
+| SUM() | Calculates the total of values. |
+| AVG() | Calculates the average. |
+| MIN() | Finds the minimum value. |
+| MAX() | Finds the maximum value. |
+
+---
+
+## 5. SQLite Data Types
+
+| Data Type | Definition |
+|---|---|
+| INTEGER | Whole numbers. |
+| REAL | Decimal numbers. |
+| TEXT | Text or strings. |
+| BLOB | Binary data. |
+| NULL | Represents a missing or unknown value. |
+
+---
+
+## 6. How to Create a Simple Table in SQLite
+
+Let's create a database table named `Students`.
+
+### Step 1: Create a Table
+
+```sql
+CREATE TABLE Students (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    age INTEGER,
+    city TEXT
+);
+```
+
+**Explanation:**
+- `CREATE TABLE`: Creates a new table.
+- `Students`: Table name.
+- `id`: Unique student ID.
+- `PRIMARY KEY`: Identifies each student uniquely.
+- `AUTOINCREMENT`: Automatically generates increasing IDs.
+- `name`: Stores student names.
+- `age`: Stores student ages.
+- `city`: Stores student cities.
+
+### Step 2: Insert Data
+
+```sql
+INSERT INTO Students (name, age, city)
+VALUES ('Ahmad', 16, 'Pakistan');
+```
+
+Add another student:
+
+```sql
+INSERT INTO Students (name, age, city)
+VALUES ('Ali', 17, 'Lahore');
+```
+
+### Step 3: Display All Records
+
+```sql
+SELECT * FROM Students;
+```
+
+### Step 4: Display Specific Columns
+
+```sql
+SELECT name, age FROM Students;
+```
+
+### Step 5: Search Using WHERE
+
+```sql
+SELECT * FROM Students
+WHERE age = 16;
+```
+
+### Step 6: Update Records
+
+```sql
+UPDATE Students
+SET city = 'Karachi'
+WHERE id = 1;
+```
+
+### Step 7: Delete a Record
+
+```sql
+DELETE FROM Students
+WHERE id = 2;
+```
+
+---
+
+## 7. Sorting and Filtering Data
+
+### Sort Records
+
+```sql
+SELECT * FROM Students
+ORDER BY name ASC;
+```
+
+### Sort in Descending Order
+
+```sql
+SELECT * FROM Students
+ORDER BY age DESC;
+```
+
+### Search Using LIKE
+
+```sql
+SELECT * FROM Students
+WHERE name LIKE 'A%';
+```
+
+This finds names starting with the letter A.
+
+### Limit Results
+
+```sql
+SELECT * FROM Students
+LIMIT 5;
+```
+
+---
+
+## 8. Useful Aggregate Functions
+
+```sql
+SELECT COUNT(*) FROM Students;
+```
+Counts all students.
+
+```sql
+SELECT AVG(age) FROM Students;
+```
+Calculates average age.
+
+```sql
+SELECT MAX(age) FROM Students;
+```
+Finds the highest age.
+
+```sql
+SELECT MIN(age) FROM Students;
+```
+Finds the lowest age.
+
+---
+
+## 9. Important SQLite Commands
+
+```sql
+.tables
+```
+Displays all tables.
+
+```sql
+.schema Students
+```
+Displays the structure of the Students table.
+
+```sql
+.databases
+```
+Displays available databases.
+
+```sql
+.quit
+```
+Exits the SQLite command-line interface.
+
+*Note: These are SQLite command-line shell commands, not ordinary SQL statements.*
+
+---
+
+## 10. Complete Practical Example
+
+Run these SQL statements in order:
+
+```sql
+CREATE TABLE Students (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    age INTEGER,
+    city TEXT
+);
+
+INSERT INTO Students (name, age, city)
+VALUES
+('Ahmad', 16, 'Pakistan'),
+('Ali', 17, 'Lahore'),
+('Hassan', 18, 'Islamabad');
+
+SELECT * FROM Students;
+
+UPDATE Students
+SET age = 19
+WHERE id = 3;
+
+SELECT * FROM Students
+WHERE age > 16;
+
+DELETE FROM Students
+WHERE id = 2;
+
+SELECT * FROM Students;
+```
+
+---
+
+## 11. Advantages of SQLite
+
+1. Easy to learn and use.
+2. No server installation required.
+3. Lightweight database system.
+4. Suitable for small applications and prototypes.
+5. Supports transactions.
+6. Works on multiple operating systems.
+
+---
+
+## 12. Conclusion
+
+SQLite is a powerful and beginner-friendly database management system. It helps developers store, retrieve, update, and manage data using SQL commands.
+
+Learning SQLite provides a strong foundation for understanding database management and working with larger database systems.
+
+---
+
+**Project:** SQLITE – Beginner Learning Guide  
+**Created for:** Database Learning Project
